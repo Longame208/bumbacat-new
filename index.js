@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import cors
 
 dotenv.config();
 
@@ -17,6 +18,11 @@ const SYSTEM_PROMPT = {
 const conversations = new Map();
 
 app.use(express.json());
+
+// Use CORS middleware with specific domain
+app.use(cors({
+    origin: 'https://kzmg2rg5q9082xx0u81y.lite.vusercontent.net' // Allow only this domain
+}));
 
 app.post('/chat', async (req, res) => {
     const { sessionId, message } = req.body;
